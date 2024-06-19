@@ -4,6 +4,8 @@ import java.io.*;
 import java.nio.BufferOverflowException;
 import java.util.ArrayList;
 import java.util.List;
+import exceptions.*;
+import exceptions.InvalidDataIdException;
 
 /**
  * General reading classs
@@ -70,5 +72,27 @@ public class GeneralReader {
         }
     }
 
+
+    public String searchDataWithId(String patch, String textSeparator, String id, int positionInTheDataBaseLine)
+    throws FileNotFoundException, IOException, InvalidDataIdException{
+        try(BufferedReader br = new BufferedReader(new FileReader(patch))){
+
+            String line = br.readLine();
+            while (line != null){
+               if(line.split(textSeparator)[positionInTheDataBaseLine].equals(id)){
+                   return line;
+               }
+               line = br.readLine();
+            }
+
+            throw new InvalidDataIdException();
+
+        }catch (FileNotFoundException e){
+            throw new FileNotFoundException();
+        }
+        catch (IOException e){
+            throw new IOException();
+        }
+    }
 
 }

@@ -19,5 +19,5 @@ public class textDataBase {
         this.generalReader = new GeneralReader();
         this.generalWriter = new GeneralWriter();
     }
-    
+
 }

@@ -72,9 +72,20 @@ public class GeneralReader {
         }
     }
 
-
+    /**
+     * search data in the database per id
+     * @param patch the file patch
+     * @param textSeparator the text separator
+     * @param id the unique id a data
+     * @param positionInTheDataBaseLine the position in data line
+     * @return a line with the data
+     * @throws FileNotFoundException launched when file is not found
+     * @throws IOException launched when there is any other error in reading
+     * @throws InvalidDataIdException launched when id is not found
+     */
     public String searchDataWithId(String patch, String textSeparator, String id, int positionInTheDataBaseLine)
     throws FileNotFoundException, IOException, InvalidDataIdException{
+
         try(BufferedReader br = new BufferedReader(new FileReader(patch))){
 
             String line = br.readLine();

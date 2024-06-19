@@ -1,8 +1,9 @@
 package entities.Writer_and_reader;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.BufferOverflowException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * General reading classs
@@ -34,4 +35,40 @@ public class GeneralReader {
             return "ERROR";
         }
     }
+
+    /**
+     * read the entire database
+     * @param patch The text file patch
+     * @param textSeparator The file text separtor
+     * @return a list of a list containing the file data
+     * @throws FileNotFoundException launched when file is not found
+     * @throws IOException launched when there is any other error in reading
+     */
+    public List<List<String>> readEntireDatabaseToArray(String patch, String textSeparator)
+           throws FileNotFoundException, IOException{
+
+        List<List<String>> resp = new ArrayList<>();
+
+        try(BufferedReader br = new BufferedReader(new FileReader(patch))){
+            String line = br.readLine();
+
+            while(line != null){
+                List<String> l = new ArrayList<>();
+                for(String s : line.split(textSeparator)){
+                    l.add(s);
+                }
+                resp.add(l);
+                line = br.readLine();
+            }
+            return resp;
+        }catch (FileNotFoundException e){
+            throw new FileNotFoundException();
+
+        }
+        catch (IOException e){
+            throw new IOException();
+        }
+    }
+
+
 }

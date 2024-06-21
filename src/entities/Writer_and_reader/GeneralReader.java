@@ -106,4 +106,21 @@ public class GeneralReader {
         }
     }
 
+    public ArrayList<String> readAllrowInDatabase(String patch, String textSeparator){
+        try(BufferedReader br = new BufferedReader(new FileReader(patch))){
+            ArrayList<String> resp = new ArrayList<>();
+            String line = br.readLine();
+
+            while(line != null){
+                resp.add(line);
+                line = br.readLine();
+            }
+            return resp;
+
+
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
 }
